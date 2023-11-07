@@ -1,0 +1,102 @@
+﻿@{
+    ViewData["Title"] = "Profil Page";
+}
+
+
+<div class="mt-2" style="width:50%">
+    <div class="row">
+        <h2>Profil</h2>
+        <div class="col-md-4">
+            <a href="/Profil/AddProfil" class="btn btn-primary">Add Profil</a>
+        </div>
+        <form asp-action="Index">
+            <div class="row mt-2">
+                <div class="col-md-8">
+                    <input name="search" class="form-control" placeholder="Cari Berdasarkan Nama" />
+                </div>
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-info">Cari</button>
+                </div>
+            </div>
+        </form>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        <a>Id</a>
+                    </th>
+                    <th>
+                        <a>NIK</a>
+                    </th>
+                    <th>
+                        <a>Nama</a>
+                    </th>
+                    <th>
+                        <a>Alamat</a>
+                    </th>
+                    <th>
+                        <a>Status Perkawinan</a>
+                    </th>
+                    <th>
+                        <a>Action</a>
+                    </th>
+                </tr>
+
+                @foreach (var pro in Model.Profil)
+                {
+                    <tr>
+                        <td>@pro.Id</td>
+                        <td>@pro.NIK</td>
+                        <td>@pro.Nama</td>
+                        <td>@pro.Alamat</td>
+                        <td>
+                            @if (pro.StatusPerkawinan == "BelumKawin")
+                            {
+                                <a>Belum Kawin</a>
+                            }
+                            else
+                            {
+                                <a>Kawin</a>
+                            
+                             }
+                        </td>
+                        <td>
+                            <a class="btn btn-success" href="/Profil/EditProfil?id=@pro.Id">Edit</a>
+                            <a class="btn btn-danger" href="/Profil/DeleteProfil?id=@pro.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </thead>
+        </table>
+    </div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            @if (Model.CurrentPage > 1)
+            {
+                <li class="page-item">
+                    <a class="page-link" href="/Profil/Index?search=@Model.Search&currentPage=@(Model.CurrentPage-1)" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            }
+            @for(int i=1;i<=Model.TotalPages;i++){
+                if (i == Model.CurrentPage)
+                {
+                    <li class="page-item"><a class="page-link active" href="/Profil/Index?search=@Model.Search&currentPage=@i"> @i</a></li>
+                }
+                else{
+                    <li class="page-item"><a class="page-link" href="/Profil/Index?search=@Model.Search&currentPage=@i"> @i</a></li>
+                }
+            }
+            @if (Model.CurrentPage < Model.TotalPages)
+            {
+                <li class="page-item">
+                    <a class="page-link" href="/Profil/Index?search=@Model.Search&currentPage=@(Model.CurrentPage+1)" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+            }
+        </ul>
+    </nav>
+</div>
+

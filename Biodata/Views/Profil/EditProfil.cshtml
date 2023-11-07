@@ -1,0 +1,36 @@
+﻿@model Biodata.Models.Domain.Profil
+@{
+    //Layout = "_Layout";
+}
+<div class="mt-2" style="width:50%">
+    <form asp-action="EditProfil">
+        <input asp-for="Id" type="hidden" class="form-control">
+    <h2>Add Profil</h2>
+        <div class="mb-3">
+            <label asp-for="NIK" class="form-label">NIK</label>
+            <input asp-for="NIK" type="text" class="form-control">
+            <span class="text-danger" asp-validation-for="NIK"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Nama" class="form-label">Nama</label>
+            <input asp-for="Nama" type="text" class="form-control">
+            <span class="text-danger" asp-validation-for="Nama"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Alamat" class="form-label">Alamat</label>
+            <input asp-for="Alamat" type="text" class="form-control">
+            <span class="text-danger" asp-validation-for="Alamat"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="StatusPerkawinan" class="form-label">Status</label>
+            <select asp-for="StatusPerkawinan" name="StatusPerkawinan">
+                <option value="BelumKawin">Belum Kawin</option>
+                <option value="Kawin">Kawin</option>
+            </select>
+            <span class="text-danger" asp-validation-for="StatusPerkawinan"></span>
+        </div>
+  
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a href="/Profil/Index" class="btn btn-primary">Semua Profil</a>
+</form>
+</div>
